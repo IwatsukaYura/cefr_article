@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: cefr_postgres
+    environment:
+      POSTGRES_DB: cefr_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5434:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: cefr_app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cefr_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: cefr-article
+  datasource:
+    url: jdbc:postgresql://localhost:5434/cefr_db
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
