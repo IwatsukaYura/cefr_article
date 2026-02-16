@@ -21,7 +21,7 @@ public class NewsService {
     // Default feeds
     private static final List<String> RSS_FEEDS = List.of(
         "http://feeds.bbci.co.uk/news/world/rss.xml",
-        "https://learningenglish.voanews.com/api/zg$omevviq"
+        "https://breakingnewsenglish.com/rss.xml" 
     );
 
     private final RssFetcherService rssFetcherService;
